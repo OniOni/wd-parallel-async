@@ -1,0 +1,23 @@
+{ 
+    "name" : "wd-parallel-async"
+    , "description" : "Run your WD.js driven tests in multiple browsers, at the same time"
+    , "tags" : ["web", "automation", "browser", "javascript", "parallel"]
+    , "version" : "0.0.1"
+    , "author" : "Mathieu Sabourin <mathieu.c.sabourin@gmail.com>"
+    , "repository" : { 
+	"type" : "git"
+	, "url" : "https://github.com/OniOni/wd-parallel-async.git"
+    }
+    , "bugs" : { 
+	"url" : "https://github.com/OniOni/wd-parallel-async/issues" 
+    }
+    , "engines" : ["node"]
+    , "main" : "./lib/main"
+    , "directories" : { "lib" : "./lib" }
+    , "dependencies" : {
+	"wd" : "latest"
+    }
+    , "devDependencies" : {
+	"wd" : "latest"
+    }
+}
