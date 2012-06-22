@@ -26,7 +26,7 @@ parallelizer.run([{
 	    browser.title(function(err, title) {
 		assert.ok(~title.indexOf('I am a page title - Sauce Labs'), 'Wrong title!');
 		browser.elementById('submit', function(err, el) {
-		    browser.clickElement(el, function() {
+		    el.click(function() {
 			browser.eval("window.location.href", function(err, title) {
 			    assert.ok(~title.indexOf('#'), 'Wrong title!');
   			    browser.quit()
