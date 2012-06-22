@@ -2,8 +2,8 @@ var webdriver = require('../lib/main')
   , assert = require('assert');
 
 // CONFIGURE SAUCE CREDENTIALS HERE
-var username = "msabourin",
-accessKey = "b9986d37-44b1-42a1-92a7-ef2882bfd502";
+var username = "your-sauce-username",
+accessKey = "your-sauce-acces-key";
 
 var parallizer = webdriver.parallizer({
     host: "ondemand.saucelabs.com", 
