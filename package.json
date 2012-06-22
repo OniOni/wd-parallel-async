@@ -2,7 +2,7 @@
     "name" : "wd-parallel-async"
     , "description" : "Run your WD.js driven tests in multiple browsers, at the same time"
     , "tags" : ["web", "automation", "browser", "javascript", "parallel"]
-    , "version" : "0.0.1"
+    , "version" : "0.0.2"
     , "author" : "Mathieu Sabourin <mathieu.c.sabourin@gmail.com>"
     , "repository" : { 
 	"type" : "git"
