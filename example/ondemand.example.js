@@ -5,14 +5,14 @@ var webdriver = require('../lib/main')
 var username = "your-sauce-username",
 accessKey = "your-sauce-acces-key";
 
-var parallizer = webdriver.parallizer({
+var parallelizer = webdriver.parallelizer({
     host: "ondemand.saucelabs.com", 
     port: 80, 
     username: username,
     accessKey: accessKey
 });
 
-parallizer.run([
+parallelizer.run([
     {browserName:'chrome', tags: ["examples"], name: "wd parallel async 1/4"},
     {browserName:'firefox', tags: ["examples"], name: "wd parallel async 2/4"},
     {browserName:'firefox', tags: ["examples"], name: "wd parallel async 3/4", platform: "LINUX"},

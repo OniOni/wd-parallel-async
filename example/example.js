@@ -1,9 +1,9 @@
 var webdriver = require('../lib/main')
   , assert = require('assert');
 
-var parallizer = webdriver.parallizer();
+var parallelizer = webdriver.parallelizer();
 
-parallizer.run([{ 
+parallelizer.run([{ 
     browserName:'chrome',
     tags: ["examples"],
     name: "This is an example test",
