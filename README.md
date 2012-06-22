@@ -76,7 +76,7 @@ parallelizer.run([{
 ```
 
 ## Supported Methods
-This uses <a href='https://github.com/sebv/node-wd-sync'>node-wd-sync</a> written by <a href='https://github.com/sebv'>sebv</a> so you can check <a href='https://github.com/sebv/node-wd-sync'>this</a> page on supported methods.
+All tests are run with WD.js check the [docs](https://github.com/admc/wd) for information about available methods.
 
 ### Full JsonWireProtocol mapping:
 
