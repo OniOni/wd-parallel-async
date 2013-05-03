@@ -24,11 +24,11 @@ parallelizer.run([{
     browser.init(desired, function() {
 	browser.get("http://saucelabs.com/test/guinea-pig", function() {
 	    browser.title(function(err, title) {
-		assert.ok(~title.indexOf('I am a page title - Sauce Labs'), 'Wrong title!');
+		assert.ok(~title.indexOf('I am a page title - Sauce Labs'), 'Wrong title! ' + title);
 		browser.elementById('submit', function(err, el) {
 		    el.click(function() {
 			browser.eval("window.location.href", function(err, title) {
-			    assert.ok(~title.indexOf('#'), 'Wrong title!');
+			    assert.ok(~title.indexOf("http://saucelabs.com/test/guinea-pig"), 'Wrong title!' + title);
   			    browser.quit()
 			})
 		    })
