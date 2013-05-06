@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>I am a page title</title>
+  </head>
+  <body>
+    <h1>This page is a Selenium sandbox</h1>
+
+    I am some page content
+    <div id="i_am_an_id" class="i_am_a_class">I am a div</div>
+    
+    <div id="invisible div" style="display:none;">i am invisible</div>
+    <form id="the_forms_id">
+      <p>
+	<input id="i_am_a_textbox" name="i_am_a_textbox" type="text" value="i has no focus" />
+      </p>
+      <input type="checkbox" id="unchecked_checkbox" name="unchecked_checkbox"/>
+      <input type="checkbox" id="checked_checkbox" name="checked_checkbox" checked="checked"/>
+    </form>
+  
+    <button id="click_me">Click me</button>
+
+    <div id="target">
+    </div>
+
+    <script type="text/javascript">
+      var button = document.querySelector("#click_me");
+      button.addEventListener("click", function () {
+        var d = document.querySelector("#target");
+        d.innerHTML = "<p>Heya !!!</p>"
+      });
+    </script>
+  </body>
+</html>

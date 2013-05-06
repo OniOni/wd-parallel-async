@@ -1,16 +1,17 @@
-var webdriver = require('../lib/main')
-  , assert = require('assert');
+var webdriver = require('../lib/main'),
+    assert = require('assert'),
+    path = require('path');
 
 var parallelizer = webdriver.parallelizer();
 
 parallelizer.run([{ 
     browserName:'chrome',
     tags: ["examples"],
-    name: "This is an example test",
+    name: "This is an example test"
 },{
     browserName:'firefox',
     tags: ["examples"],
-    name: "This is an example test",
+    name: "This is an example test"
 }], function(browser, desired) {
 
     browser.on('status', function(info){
@@ -22,18 +23,21 @@ parallelizer.run([{
     });
     
     browser.init(desired, function() {
-	browser.get("http://saucelabs.com/test/guinea-pig", function() {
+	var test_page = "file://" + path.resolve(__dirname, "test.html");
+	browser.get(test_page, function() {
 	    browser.title(function(err, title) {
-		assert.ok(~title.indexOf('I am a page title - Sauce Labs'), 'Wrong title! ' + title);
-		browser.elementById('submit', function(err, el) {
+		assert.ok(~title.indexOf('I am a page title'), 'Wrong title! ' + title);
+		browser.elementById('click_me', function(err, el) {
 		    el.click(function() {
-			browser.eval("window.location.href", function(err, title) {
-			    assert.ok(~title.indexOf("http://saucelabs.com/test/guinea-pig"), 'Wrong title!' + title);
-  			    browser.quit()
-			})
-		    })
-		})
-	    })
-	})
-    })
+			browser.elementById("target", function(err, target) {
+			    target.text(function(err, text) {
+				assert.equal(text, "Heya !!!");
+				browser.quit();
+			    });
+			});
+		    });
+		});
+	    });
+	});
+    });
 });
