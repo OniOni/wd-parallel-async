@@ -1,9 +1,8 @@
 var webdriver = require('../lib/main')
   , assert = require('assert');
 
-// CONFIGURE SAUCE CREDENTIALS HERE
-var username = "your-sauce-username",
-accessKey = "your-sauce-acces-key";
+var username = process.env.SAUCE_USERNAME
+  , accessKey = process.env.SAUCE_ACCESS_KEY;
 
 var parallelizer = webdriver.parallelizer({
     host: "ondemand.saucelabs.com", 
@@ -15,7 +14,7 @@ var parallelizer = webdriver.parallelizer({
 parallelizer.run([
     {browserName:'chrome', tags: ["examples"], name: "wd parallel async 1/4"},
     {browserName:'firefox', tags: ["examples"], name: "wd parallel async 2/4"},
-    {browserName:'firefox', tags: ["examples"], name: "wd parallel async 3/4", platform: "LINUX"},
+    {browserName:'chrome', tags: ["examples"], name: "wd parallel async 3/4", platform: "LINUX"},
     {browserName:'firefox', tags: ["examples"], name: "wd parallel async 4/4", platform: "LINUX"}
 ], function(browser, desired) {
 
@@ -34,8 +33,10 @@ parallelizer.run([
 		browser.elementById('submit', function(err, el) {
 		    el.click(function() {
 			browser.eval("window.location.href", function(err, title) {
-			    assert.ok(~title.indexOf('#'), 'Wrong title!');
-  			    browser.quit()
+  			    browser.quit(function () {
+                              console.log(title);
+		              assert.ok(~title.indexOf('guinea-pig'), 'Wrong title!');
+                            });
 			})
 		    })
 		})
