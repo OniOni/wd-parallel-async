@@ -18,6 +18,8 @@
 	"wd" : "latest"
     }
     , "devDependencies" : {
-	"wd" : "latest"
+	"wd" : "latest",
+        "saucelabs" : "latest",
+        "csv": "latest"
     }
 }
