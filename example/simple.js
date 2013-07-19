@@ -21,15 +21,33 @@ var mark = function(jobId, status, cb) {
   rest.updateJob(jobId, {passed: status}, cb);
 }
 
+var splice = function(obj1, obj2) {
+  for (var k in obj2) {
+    if (obj1[k] == null) {
+      obj1[k] = obj2[k];
+    } else {
+      return false;
+    }
+  }
+
+  return obj1;
+} 
+
+var now = Date.now();
 var testSite = function(url) {
- 
-  var testName = "sc4 " + url;
+
+  var same = {
+    tags: ["sc4", "https"],
+    name: "sc4 " + url,
+    build: "sc4-" + now
+  }
+
   parallelizer.run([
-    {browserName:'firefox', tags: ["sc4", "https"], name: testName, platform: "LINUX"},
-    {browserName:'chrome', tags: ["sc4", "https"], name: testName, platform: "LINUX"},
-    {browserName:'firefox', tags: ["sc4", "https"], name: testName, platform: "MAC"},
-    {browserName:'chrome', tags: ["sc4", "https"], name: testName, platform: "MAC"},
-    {browserName:'opera', tags: ["sc4", "https"], name: testName, platform: "LINUX", version: '12'}
+    splice({browserName:'firefox', platform: "LINUX"}, same),
+    splice({browserName:'chrome', platform: "LINUX"}, same),
+    splice({browserName:'firefox', platform: "MAC"}, same),
+    //splice({browserName:'chrome', platform: "MAC"}, same),
+    splice({browserName:'opera', platform: "LINUX", version: '12'}, same)
   ], function(driver, desired) {
     
     driver.on('status', function(info){
@@ -56,6 +74,11 @@ var testSite = function(url) {
         });
       });
     });
+
+    // console.log("Running...");
+    // setTimeout(function() {
+    //   driver.emit('status', "Ending that stuff!");
+    // }, 1000);
   });
 }
 
@@ -66,7 +89,7 @@ if (process.argv.length > 2) {
 }
 
 csv()
-.from.path(__dirname + "/top-1m.csv")
+.from('1,dailymotion.com\n')//.path(__dirname + "/top-1m.csv")
 .to.array(function(data, count) {
   var websites = data.slice(0, testSitesCount);
   var run = function () {
@@ -74,10 +97,13 @@ csv()
     if (w != null) {
       console.log(w);
       testSite("https://"+w[1]);
+    } else {
+      console.log("No more jobs to run.");
     }
   }
 
   parallelizer.on('end', function() {
+    
     run();
   });
   
